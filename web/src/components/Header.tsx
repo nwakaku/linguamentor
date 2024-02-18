@@ -13,6 +13,8 @@ import ConnectionButton, { ParticleConnect } from "./ui/ConnectButton";
 import { useDisconnect } from "wagmi";
 import { useAccount } from "@particle-network/connect-react-ui";
 import { useParticleConnect } from "@particle-network/connect-react-ui";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 
 interface ProfileMenuProps {
   disconnect: () => void;
@@ -26,15 +28,21 @@ export const Header = () => {
 
   return (
     <header className="self-stretch bg-white shadow-md sticky box-border flex flex-row items-center justify-between py-4 px-[62px] gap-[20px] top-[0] z-[99] max-w-full text-left text-8xl-9 text-gray-1 font-body-2-body-2 border-b-[1px] border-solid border-whitesmoke-300 mq675:pl-[31px] mq675:pr-[31px] mq675:box-border">
-      <div className="flex flex-row items-center justify-start py-[4.347039699554443px] pr-1 pl-[4.347039699554443px] gap-[4.35px]">
-        <div className="w-[29px] rounded-[2.17px] bg-green overflow-hidden shrink-0 flex flex-col items-center justify-center py-[6.520559787750244px] px-1.5 box-border">
-          <img className="w-4 h-[15.5px] relative" alt="" src="/vector-1.svg" />
-        </div>
+      <ChakraLink as={ReactRouterLink} to="/">
+        <div className="flex flex-row items-center justify-start py-[4.347039699554443px] pr-1 pl-[4.347039699554443px] gap-[4.35px]">
+          <div className="w-[29px] rounded-[2.17px] bg-green overflow-hidden shrink-0 flex flex-col items-center justify-center py-[6.520559787750244px] px-1.5 box-border">
+            <img
+              className="w-4 h-[15.5px] relative"
+              alt=""
+              src="/vector-1.svg"
+            />
+          </div>
 
-        <div className="relative leading-[140%] font-medium whitespace-nowrap no-underline">
-          LinguaLink
+          <div className="relative leading-[140%] font-medium whitespace-nowrap no-underline">
+            LinguaLink
+          </div>
         </div>
-      </div>
+      </ChakraLink>
 
       <div className="h-[37px] w-[335px] flex flex-row items-center justify-end gap-[16px] max-w-full text-sm text-green-2 mq750:w-[250px]">
         {/* <ConnectionButton /> */}

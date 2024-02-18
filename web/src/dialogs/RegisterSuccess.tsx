@@ -20,14 +20,16 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 import Dialog from "./SimpleDialog";
 import { StarIcon } from "@chakra-ui/icons";
 
-export function RegisterSuccessDialog() {
+export function RegisterSuccessDialog({ isLoad }: { isLoad: boolean }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
       <Button
+        type="submit"
+        isLoading={isLoad}
         className="mt-6 w-full rounded-smi bg-gray-900 px-36 py-6 text-white h-10 text-lg font-body-2-body-2 font-thin hover:bg-black mx-auto "
-        onClick={onOpen}
+        // onClick={onOpen}
       >
         Confirm
       </Button>
@@ -44,11 +46,11 @@ export function RegisterSuccessDialog() {
           </ModalBody>
           <ModalFooter className="flex flex-col">
             <Link href="/dashboardstudent">
-            <Button className="mt-1 mb-2 w-full rounded-smi bg-gray-900 px-36 py-6 text-white h-10 text-lg font-body-2-body-2 font-thin hover:bg-black mx-auto ">
-              Go to profile
-            </Button>
+              <Button className="mt-1 mb-2 w-full rounded-smi bg-gray-900 px-36 py-6 text-white h-10 text-lg font-body-2-body-2 font-thin hover:bg-black mx-auto ">
+                Go to profile
+              </Button>
             </Link>
-            
+
             {/* <Button
               w={{ base: "150px", md: "250px", lg: "350px" }}
               variant="outline"

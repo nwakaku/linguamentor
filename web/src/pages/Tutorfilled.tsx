@@ -49,11 +49,11 @@ const Studentfilled: FunctionComponent = () => {
                       Your language you will teach
                     </FormLabel>
                     <Select
-                      placeholder="English"
+                      placeholder="Language"
                       focusBorderColor="gray"
                       borderColor="gray"
-                      className="hover:border-gray-500 "
-                    >
+                      className="hover:border-gray-500 ">
+                      <option>English</option>
                       <option>French</option>
                       <option>Spanish</option>
                       <option>Arabic</option>
@@ -68,15 +68,13 @@ const Studentfilled: FunctionComponent = () => {
                       placeholder="Exam"
                       focusBorderColor="gray"
                       borderColor="gray"
-                      className="hover:border-gray-500 "
-                    ></Input>
+                      className="hover:border-gray-500 "></Input>
                     <FormLabel className="mt-6">Duration</FormLabel>
                     <Select
                       placeholder="2 Weeks"
                       focusBorderColor="gray"
                       borderColor="gray"
-                      className="hover:border-gray-500 "
-                    >
+                      className="hover:border-gray-500 ">
                       <option>1 Month</option>
                       <option>3 Months</option>
                     </Select>
@@ -91,7 +89,7 @@ const Studentfilled: FunctionComponent = () => {
                     />
                   </FormControl>
 
-                  <RegisterSuccessDialog />
+                  <RegisterSuccessDialog isLoad={true} />
                 </CardBody>
               </Card>
             </div>
@@ -99,8 +97,7 @@ const Studentfilled: FunctionComponent = () => {
         </div>
         <Box
           w={{ base: "350px", md: "550px", lg: "750px" }}
-          className="mx-auto mb-8"
-        >
+          className="mx-auto mb-8">
           <Cookie />
         </Box>
       </div>
