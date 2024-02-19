@@ -15,6 +15,7 @@ import { AITest } from "./pages/AITest";
 import DashboadStudent from "./pages/DashboardStudent";
 import StartSession from "./pages/StartSession";
 import { MyNFTs, MyTokens } from "./pages/Covalent";
+import { AITestForTutor } from "./pages/AITestForTutor";
 
 function App() {
   const action = useNavigationType();
@@ -76,14 +77,15 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/test" element={<AITest />} />
+      <Route path="/tutortest" element={<AITestForTutor />} />
       <Route path="/matchtutors" element={<MatchTutorsOptimized />} />
       <Route path="/tutorfilled" element={<Tutorfilled />} />
       <Route path="/studentfilled" element={<Studentfilled />} />
       <Route path="/dashboard" element={<DashboadtutorOptimized />} />
       <Route path="/dashboardstudent" element={<DashboadStudent />} />
-      <Route path="/session" element={<StartSession/>} />
-      <Route path="/mynfts" element={<MyNFTs/>} />
-      <Route path="/mytokens" element={<MyTokens/>} />
+      <Route path="/session" element={<StartSession />} />
+      <Route path="/mynfts" element={<MyNFTs />} />
+      <Route path="/mytokens" element={<MyTokens />} />
     </Routes>
   );
 }

@@ -21,6 +21,8 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { writeContract } from "@wagmi/core";
 import { useContract } from "../ContractContext";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -41,6 +43,8 @@ const validationSchema = Yup.object({
 
 const Tutorfilled: FunctionComponent = () => {
   const { contractAbi, contractAddress, contract } = useContract();
+    const navigate = useNavigate();
+
 
 
   const handleSubmit = async (values: FormValues) => {
@@ -54,7 +58,8 @@ const Tutorfilled: FunctionComponent = () => {
       });
 
       console.log("Smart contract hash:", hash);
-      // After signing, link to the dashboard
+      // After signing, link to the test
+      navigate("/tutortest");
     } catch (error) {
       console.error("Form submission error:", error);
       // Handle the error, e.g., show an error message to the user
