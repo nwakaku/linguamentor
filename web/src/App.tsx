@@ -14,6 +14,7 @@ import HomePage from "./pages/home";
 import { AITest } from "./pages/AITest";
 import DashboadStudent from "./pages/DashboardStudent";
 import StartSession from "./pages/StartSession";
+import { MyNFTs, MyTokens } from "./pages/Covalent";
 
 function App() {
   const action = useNavigationType();
@@ -81,6 +82,8 @@ function App() {
       <Route path="/dashboard" element={<DashboadtutorOptimized />} />
       <Route path="/dashboardstudent" element={<DashboadStudent />} />
       <Route path="/session" element={<StartSession/>} />
+      <Route path="/mynfts" element={<MyNFTs/>} />
+      <Route path="/mytokens" element={<MyTokens/>} />
     </Routes>
   );
 }

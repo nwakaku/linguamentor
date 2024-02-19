@@ -16,7 +16,7 @@ const DashboadStudent: FunctionComponent = () => {
           <div className="md:w-2/3 flex flex-col md:space-y-8">
             <ProfileCard />
             <UserInfoCard />
-            <AssessmentCard/>
+            <AssessmentCard />
           </div>
           <div className="md:w-1/3">
             <UserSessionInfo />

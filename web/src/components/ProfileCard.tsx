@@ -1,5 +1,5 @@
-import { CopyIcon } from "@chakra-ui/icons";
-import { IconButton } from "@chakra-ui/react";
+import { ArrowRightIcon, CopyIcon } from "@chakra-ui/icons";
+import { IconButton, Link } from "@chakra-ui/react";
 import React from "react";
 
 export const ProfileCard = () => {
@@ -9,13 +9,17 @@ export const ProfileCard = () => {
         <p className="font-extrabold text-9xl">Profile</p>
         <div>
           <div className="flex space-x-2 items-center">
-           <p className="font-extrabold text-9xl">0xhabwehvb......eth</p> 
-           <IconButton aria-label="copy address" variant='unstyled' icon={<CopyIcon/>}></IconButton> 
+            <p className="font-extrabold text-9xl">0xhabwehvb......eth</p>
+            <IconButton
+              aria-label="copy address"
+              variant="unstyled"
+              icon={<CopyIcon />}
+            ></IconButton>
           </div>
-         
+
           <p className="text-green-2 font-medium">Tutor</p>
         </div>
-        <div className="space-y-2" >
+        <div className="space-y-2">
           <div className="flex space-x-2 items-center text-sm">
             {" "}
             <img src="/clock.svg" />
@@ -28,7 +32,24 @@ export const ProfileCard = () => {
           </div>
         </div>
       </div>
-      <img src="/avatar1.svg" className="w-24 h-24" />
+      <div className="flex flex-col justify-between space-y-12 items-start ">
+        <img src="/avatar1.svg" className="w-24 h-24" />
+        <div className="flex flex-col space-y-4 items-end justify-start font-body-2-body-2 text-green-2 font-medium text-sm">
+          <Link href="/mynfts" className="flex space-x-2 items-center">
+            <p> My NFTs </p>
+            <p>
+              <ArrowRightIcon fontSize={12} />{" "}
+            </p>{" "}
+          </Link>
+          <Link href="/mytokens" className="flex space-x-2 items-center ">
+            <p> My Tokens </p>
+            <p>
+              <ArrowRightIcon fontSize={12} />{" "}
+            </p>{" "}
+          </Link>
+          
+        </div>
+      </div>
     </div>
   );
 };
