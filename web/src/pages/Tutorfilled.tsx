@@ -15,15 +15,66 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { RegisterSuccessDialog } from "../dialogs/RegisterSuccess";
+import { useFormik } from "formik";
+import { Formik, Field, Form } from "formik";
+import * as Yup from "yup";
+import { writeContract } from "@wagmi/core";
+import { useContract } from "../ContractContext";
 
-const Studentfilled: FunctionComponent = () => {
+interface FormValues {
+  language: string;
+  price: string;
+  duration: string;
+  description: string;
+}
+
+
+const validationSchema = Yup.object({
+  language: Yup.string().required("Language is required"),
+  price: Yup.string().required("Price is required"),
+  duration: Yup.string().required("Duration is required"),
+  description: Yup.string(),
+});
+
+const Tutorfilled: FunctionComponent = () => {
+  const { contractAbi, contractAddress, contract } = useContract();
+
+  const handleSubmit = async (values: FormValues) => {
+    // try {
+    //   // Smart contract write
+    //   const { hash } = await writeContract({
+    //     address: contractAddress,
+    //     abi: contractAbi,
+    //     functionName: "registerStudent",
+    //     args: [values.language, parseInt(values.duration)],
+    //   });
+
+    //   console.log("Smart contract hash:", hash);
+    // } catch (error) {
+    //   console.error("Form submission error:", error);
+    //   // Handle the error, e.g., show an error message to the user
+    // }
+  };
+
+
   return (
-    <>
+    <Formik
+      initialValues={{
+        language: "",
+        price: "",
+        duration: "",
+        description: "",
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}>
+      {(formikProps) => (
+        <Form>
+          <>
       <div className="bg-white font-body-2-body-2">
         <Header />
         <section className="absolute top-[-0.3px] left-[0px] rounded-[50%] [background:linear-gradient(172.34deg,_rgba(88,_204,_2,_0.08),_rgba(88,_204,_2,_0))] [filter:blur(274.34px)] w-full h-full" />
         <div className="flex space-x-2 justify-center items-start py-10 px-6 ">
-          <img src="/tutor.svg" />
+          <img src="/student.svg" />
           <div>
             <div className="flex space-x-2 items-center">
               <p className="bg-beige p-2 rounded-md text-green-2 text-sm">
@@ -46,13 +97,18 @@ const Studentfilled: FunctionComponent = () => {
                 <CardBody>
                   <FormControl as="fieldset">
                     <FormLabel className="mt-6">
-                      Your language you will teach
+                      Pick a language you will teach
                     </FormLabel>
                     <Select
-                      placeholder="Language"
+                      name="language"
+                      placeholder="language"
                       focusBorderColor="gray"
                       borderColor="gray"
-                      className="hover:border-gray-500 ">
+                      className="hover:border-gray-500"
+                      onChange={formikProps.handleChange}
+                      onBlur={formikProps.handleBlur}
+                      value={formikProps.values.language}
+                    >
                       <option>English</option>
                       <option>French</option>
                       <option>Spanish</option>
@@ -65,31 +121,52 @@ const Studentfilled: FunctionComponent = () => {
                       <span className="text-gray-400">(USDT)</span>
                     </FormLabel>
                     <Input
-                      placeholder="Exam"
+                      type="number"
+                      name="price"
                       focusBorderColor="gray"
                       borderColor="gray"
-                      className="hover:border-gray-500 "></Input>
-                    <FormLabel className="mt-6">Duration</FormLabel>
+                      className="hover:border-gray-500 "
+                      onChange={formikProps.handleChange}
+                      onBlur={formikProps.handleBlur}
+                      value={formikProps.values.price}
+                    />
+                    <FormLabel className="mt-6">duration</FormLabel>
                     <Select
-                      placeholder="2 Weeks"
+                      name="duration"
+                      placeholder="duration"
                       focusBorderColor="gray"
                       borderColor="gray"
-                      className="hover:border-gray-500 ">
-                      <option>1 Month</option>
-                      <option>3 Months</option>
+                      className="hover:border-gray-500"
+                      onChange={formikProps.handleChange}
+                      onBlur={formikProps.handleBlur}
+                      value={formikProps.values.duration}
+                    >
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
                     </Select>
 
-                    <Text className="mt-6 mb-3 font-medium">Bio</Text>
+                    <Text className="mt-6 mb-3">Description (optional)</Text>
                     <Textarea
-                      placeholder="Tell us a little about yourself"
+                      name="description"
+                      placeholder="Give a brief description"
                       focusBorderColor="gray"
                       borderColor="gray"
-                      className="hover:border-gray-500 rounded-md text-black"
+                      className="hover:border-gray-500 rounded-md"
                       size="sm"
+                      onChange={formikProps.handleChange}
+                      onBlur={formikProps.handleBlur}
+                      value={formikProps.values.description}
                     />
                   </FormControl>
-
-                  <RegisterSuccessDialog isLoad={true} />
+                  {/* <Button
+                          mt={4}
+                          colorScheme="teal"
+                          isLoading={formikProps.isSubmitting}
+                          type="submit">
+                          Submit
+                        </Button> */}
+                  <RegisterSuccessDialog isLoad={formikProps.isSubmitting} />
                 </CardBody>
               </Card>
             </div>
@@ -97,12 +174,16 @@ const Studentfilled: FunctionComponent = () => {
         </div>
         <Box
           w={{ base: "350px", md: "550px", lg: "750px" }}
-          className="mx-auto mb-8">
+          className="mx-auto mb-8"
+        >
           <Cookie />
         </Box>
       </div>
-    </>
+      </>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
-export default Studentfilled;
+export default Tutorfilled;

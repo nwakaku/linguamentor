@@ -23,6 +23,7 @@ export function RateSessionDialog() {
         variant="outline"
         borderColor="red"
         onClick={onOpen}
+        
         className="w-full mb-3 rounded-smi px-36 py-6 text-red h-10 text-lg font-body-2-body-2 font-thin mx-auto "
       >
         Cancel session

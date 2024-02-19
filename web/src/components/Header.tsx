@@ -9,22 +9,21 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import ConnectionButton, { ParticleConnect } from "./ui/ConnectButton";
-import { useDisconnect } from "wagmi";
-import { useAccount } from "@particle-network/connect-react-ui";
-import { useParticleConnect } from "@particle-network/connect-react-ui";
+import {ConnectionButton}  from "./ui/ConnectButton";
+import { useDisconnect, useAccount } from "wagmi";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 
+
 interface ProfileMenuProps {
   disconnect: () => void;
-  address?: string;
+  address?: any;
 }
 
 export const Header = () => {
   const address = useAccount();
   // const { disconnectWeb3 } = useDisconnect();
-  const { disconnect, connect } = useParticleConnect();
+  const { disconnect } = useDisconnect();
 
   return (
     <header className="self-stretch bg-white shadow-md sticky box-border flex flex-row items-center justify-between py-4 px-[62px] gap-[20px] top-[0] z-[99] max-w-full text-left text-8xl-9 text-gray-1 font-body-2-body-2 border-b-[1px] border-solid border-whitesmoke-300 mq675:pl-[31px] mq675:pr-[31px] mq675:box-border">
@@ -59,7 +58,7 @@ export const Header = () => {
             />
           )
         )}
-        {!address && <ParticleConnect />}
+        {!address && <ConnectionButton/>}
       </div>
     </header>
   );

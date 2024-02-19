@@ -19,6 +19,18 @@ import {
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import Dialog from "./SimpleDialog";
 import { StarIcon } from "@chakra-ui/icons";
+import * as Yup from "yup";
+import { Formik, Field, Form } from "formik";
+
+interface FormValues {
+  amount: number;
+  language: string;
+}
+
+const validationSchema = Yup.object({
+  amount: Yup.number().required("Amount is required"),
+  language: Yup.string().required("Language is required"),
+});
 
 export function ManualMatchTutorDialog() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,10 +63,80 @@ export function ManualMatchTutorDialog() {
           <ModalBody className="mx-auto">
             <ManualMatchTutorDialogContent />
           </ModalBody>
-          <ModalFooter className="flex flex-col">
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+
+const ManualMatchTutorDialogContent = () => {
+  const handleSubmit = async (values: FormValues) => {};
+  return (
+    <Formik
+      initialValues={{
+        amount: 0,
+        language: ''
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {(formikProps) => (
+        <Form>
+          <div className="font-body-2-body-2">
+            <div className="mt-3 ">
+              <p className="text-3xl font-bold text-black">
+                Match tutor manually
+              </p>
+              <img className="mx-auto" src="/manual.svg" />
+            </div>
+            <Divider className="my-5" />
+            <div className="space-y-2 mt-4 text-gray1-100">
+              <Text className=" text-gray1-200 font-medium ">Language</Text>
+              <Select
+                className="hover:border-black "
+                focusBorderColor="grey"
+                borderColor="grey"
+                w={{ base: "150px", md: "250px", lg: "360px" }}
+                icon={<img src="/arrowdown.svg" />}
+                placeholder="English"
+                onChange={formikProps.handleChange}
+                onBlur={formikProps.handleBlur}
+                value={formikProps.values.language}
+              >
+                <option value="option1">Spanish</option>
+                <option value="option2">French</option>
+                <option value="option3">German</option>
+                <option value="option3">Arabic</option>
+                <option value="option3">Chinese</option>
+                <option value="option3">Japanese</option>
+                <option value="option3">Afrikans</option>
+              </Select>
+            </div>
+            <div className="space-y-2 mt-4  text-gray1-200 font-medium">
+              <Text>Amount per session</Text>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  className="text-gray1-100"
+                >
+                  $
+                </InputLeftElement>
+                <Input
+                  className="hover:border-black"
+                  variant="outline"
+                  placeholder="Tip your tutor"
+                  focusBorderColor="black"
+                  borderColor="grey"
+                  w={{ base: "150px", md: "250px", lg: "360px" }}
+                  onChange={formikProps.handleChange}
+                  onBlur={formikProps.handleBlur}
+                  value={formikProps.values.amount}
+                />
+              </InputGroup>
+            </div>
             <Button
               w={{ base: "150px", md: "250px", lg: "360px" }}
-              className="mt-1 mb-2 rounded-smi bg-gray-900 px-36 py-6 text-white h-10 text-lg font-body-2-body-2 font-thin hover:bg-black mx-auto "
+              className="mt-6 mb-2 rounded-smi bg-gray-900 px-36 py-6 text-white h-10 text-lg font-body-2-body-2 font-thin hover:bg-black mx-auto "
             >
               Find tutors
             </Button>
@@ -66,56 +148,9 @@ export function ManualMatchTutorDialog() {
             >
               Confirm
             </Button> */}
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  );
-}
-
-const ManualMatchTutorDialogContent = () => {
-  return (
-    <div className="font-body-2-body-2">
-      <div className="mt-3 ">
-        <p className="text-3xl font-bold text-black">Match tutor manually</p>
-        <img className="mx-auto" src="/manual.svg" />
-      </div>
-      <Divider className="my-5" />
-      <div className="space-y-2 mt-4 text-gray1-100">
-        <Text className=" text-gray1-200 font-medium ">Language</Text>
-        <Select
-          className="hover:border-black "
-          focusBorderColor="grey"
-          borderColor="grey"
-          w={{ base: "150px", md: "250px", lg: "360px" }}
-          icon={<img src="/arrowdown.svg" />}
-          placeholder="English"
-        >
-          <option value="option1">Spanish</option>
-          <option value="option2">French</option>
-          <option value="option3">German</option>
-          <option value="option3">Arabic</option>
-          <option value="option3">Chinese</option>
-          <option value="option3">Japanese</option>
-          <option value="option3">Afrikans</option>
-        </Select>
-      </div>
-      <div className="space-y-2 mt-4  text-gray1-200 font-medium">
-        <Text>Amount per session</Text>
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" className="text-gray1-100">
-            $
-          </InputLeftElement>
-          <Input
-            className="hover:border-black"
-            variant="outline"
-            placeholder="Tip your tutor"
-            focusBorderColor="black"
-            borderColor="grey"
-            w={{ base: "150px", md: "250px", lg: "360px" }}
-          />
-        </InputGroup>
-      </div>
-    </div>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
