@@ -20,7 +20,7 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 import Dialog from "./SimpleDialog";
 import { StarIcon } from "@chakra-ui/icons";
 
-export function RegisterSuccessDialog({ isLoad }: { isLoad: boolean }) {
+export function RegisterSuccessTutorDialog({ isLoad }: { isLoad: boolean }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -42,12 +42,12 @@ export function RegisterSuccessDialog({ isLoad }: { isLoad: boolean }) {
           </Button> */}
           {/* <ModalCloseButton color="black" /> */}
           <ModalBody className="mx-auto">
-            <RegisterSuccessDialogContent />
+            <RegisterSuccessTutorDialogContent />
           </ModalBody>
           <ModalFooter className="flex flex-col">
-            <Link href="/dashboardstudent">
+            <Link href="/test">
               <Button className="mt-1 mb-2 w-full rounded-smi bg-gray-900 px-36 py-6 text-white h-10 text-lg font-body-2-body-2 font-thin hover:bg-black mx-auto ">
-                Go to profile
+                Take test
               </Button>
             </Link>
 
@@ -66,12 +66,19 @@ export function RegisterSuccessDialog({ isLoad }: { isLoad: boolean }) {
   );
 }
 
-const RegisterSuccessDialogContent = () => {
+const RegisterSuccessTutorDialogContent = () => {
   return (
-    <div className="pt-8 font-body-2-body-2 ">
-      <img src="/testsuccess.svg" className="w-full" />
-      <p className="text-black my-6 text-center mx-6">
-        Welcome to <span className="text-darkolivegreen font-semibold ">Lingualink! 🥳</span>  You're off to a great start with us.
+    <div className=" font-body-2-body-2 text-black my-4 text-center mx-6 ">
+      <img src="/testsuccess.svg" className="w-full mb-4" />
+      <p className="">
+        Welcome to{" "}
+        <span className="text-darkolivegreen font-semibold ">
+          Lingualink! 🥳
+        </span>{" "}
+      </p>
+      <p>
+        We require all tutors to take a language test as a final step for
+        registration.
       </p>
     </div>
   );

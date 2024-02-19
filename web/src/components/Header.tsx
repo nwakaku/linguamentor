@@ -25,8 +25,6 @@ export const Header = () => {
   // const { disconnectWeb3 } = useDisconnect();
   const { disconnect } = useDisconnect();
 
-  console.log(address);
-
   return (
     <header className="self-stretch bg-white shadow-md sticky box-border flex flex-row items-center justify-between py-4 px-[62px] gap-[20px] top-[0] z-[99] max-w-full text-left text-8xl-9 text-gray-1 font-body-2-body-2 border-b-[1px] border-solid border-whitesmoke-300 mq675:pl-[31px] mq675:pr-[31px] mq675:box-border">
       <ChakraLink as={ReactRouterLink} to="/">
