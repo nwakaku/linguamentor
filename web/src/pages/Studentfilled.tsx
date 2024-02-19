@@ -122,7 +122,7 @@ const Studentfilled: FunctionComponent = () => {
                           <FormLabel className="mt-6">Goal</FormLabel>
                           <Select
                             name="goal"
-                            placeholder="Exam"
+                            placeholder="Goal"
                             focusBorderColor="gray"
                             borderColor="gray"
                             className="hover:border-gray-500"
@@ -130,6 +130,7 @@ const Studentfilled: FunctionComponent = () => {
                             onBlur={formikProps.handleBlur}
                             value={formikProps.values.goal}>
                             <option>Interview</option>
+                            <option>Exam</option>
                             <option>Relocation</option>
                             <option>Other</option>
                           </Select>
@@ -143,9 +144,9 @@ const Studentfilled: FunctionComponent = () => {
                             onChange={formikProps.handleChange}
                             onBlur={formikProps.handleBlur}
                             value={formikProps.values.level}>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                            <option>Novice</option>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
                           </Select>
 
                           <Text className="mt-6 mb-3">

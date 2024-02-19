@@ -12,22 +12,24 @@ import {
 } from "@chakra-ui/react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import Dialog from "./SimpleDialog";
-// import {
-//   useAccount,
-//   useConnectModal,
-// } from "@particle-network/connect-react-ui";
-import { useAccount } from "wagmi";
+import {
+  useAccount, useEnsAddress,
 
+} from "wagmi";
+import {
+  useConnectModal,
+ 
+} from '@rainbow-me/rainbowkit';
 
 export function RoleDialog() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const account = useAccount();
-  // const { openConnectModal } = useConnectModal();
+const {address} = useAccount();
+  const { openConnectModal } = useConnectModal();
 
   const handleConnect = () => {
-    // if (openConnectModal && !account) {
-    //   openConnectModal();
-    // }
+    if (!address && openConnectModal) {
+      openConnectModal();
+    }
     onOpen();
   };
 
@@ -41,11 +43,11 @@ export function RoleDialog() {
         Get started
       </Button>
 
-      {account && (
+      {address && (
         <Modal isOpen={isOpen} onClose={onClose} size="2xl" isCentered>
           <ModalOverlay />
           <ModalContent bg="white">
-            <Button className="flex justify-end mt-6" onClick={onClose}>
+            <Button className="flex justify-end mt-6 hover:bg-transparent" onClick={onClose}>
               <img src="/close.svg" />
             </Button>
             {/* <ModalCloseButton color="black" /> */}
