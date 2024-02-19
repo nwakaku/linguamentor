@@ -9,11 +9,11 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import {ConnectionButton}  from "./ui/ConnectButton";
+import { ConnectionButton } from "./ui/ConnectButton";
 import { useDisconnect, useAccount } from "wagmi";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
-
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 interface ProfileMenuProps {
   disconnect: () => void;
@@ -21,9 +21,11 @@ interface ProfileMenuProps {
 }
 
 export const Header = () => {
-  const address = useAccount();
+  const { address, isConnected } = useAccount();
   // const { disconnectWeb3 } = useDisconnect();
   const { disconnect } = useDisconnect();
+
+  console.log(address);
 
   return (
     <header className="self-stretch bg-white shadow-md sticky box-border flex flex-row items-center justify-between py-4 px-[62px] gap-[20px] top-[0] z-[99] max-w-full text-left text-8xl-9 text-gray-1 font-body-2-body-2 border-b-[1px] border-solid border-whitesmoke-300 mq675:pl-[31px] mq675:pr-[31px] mq675:box-border">
@@ -44,21 +46,20 @@ export const Header = () => {
       </ChakraLink>
 
       <div className="h-[37px] w-[335px] flex flex-row items-center justify-end gap-[16px] max-w-full text-sm text-green-2 mq750:w-[250px]">
-        {/* <ConnectionButton /> */}
-        {address ? (
+        {isConnected ? (
           <ProfileMenuTutor
             disconnect={disconnect}
             address={address || undefined}
           />
         ) : (
-          address && (
+          isConnected && (
             <ProfileMenuStudent
               disconnect={disconnect}
               address={address || undefined}
             />
           )
         )}
-        {!address && <ConnectionButton/>}
+        <ConnectionButton />
       </div>
     </header>
   );
@@ -73,7 +74,7 @@ const ProfileMenuTutor: React.FC<ProfileMenuProps> = ({
       <MenuButton
         variant="outline"
         borderColor="black"
-        className="rounded-lg font-medium text-black py-2 "
+        className="rounded-lg font-medium text-black py-2 px-4"
         as={Button}
         rightIcon={<ChevronDownIcon />}
       >
@@ -81,7 +82,9 @@ const ProfileMenuTutor: React.FC<ProfileMenuProps> = ({
           <img src="/avatar2.svg" />
           <p>
             {" "}
-            {address ? `0x${address.slice(2, 2)}...${address.slice(-2)}` : ""}
+            {typeof address === "string"
+              ? `0x${address.slice(2, 4)}...${address.slice(-4)}`
+              : ""}
           </p>
         </div>
       </MenuButton>
@@ -94,8 +97,8 @@ const ProfileMenuTutor: React.FC<ProfileMenuProps> = ({
             <img src="/avatar2.svg" className="h-10 w-10" />
             <div className="text-black space-y-2">
               <p className="text-green-2 font-bold">
-                {address
-                  ? `0x${address.slice(2, 4)}...${address.slice(-4)}`
+                {typeof address === "string"
+                  ? `0x${address.slice(2, 6)}...${address.slice(-4)}`
                   : ""}
               </p>
               <p>Tutor</p>
@@ -115,7 +118,9 @@ const ProfileMenuTutor: React.FC<ProfileMenuProps> = ({
             <p className="font-medium">Requests</p>
           </div>
           <div>
-            <p className="rounded-full bg-red px-3 py-1 text-white font-semibold ">3</p>
+            <p className="rounded-full bg-red px-3 py-1 text-white font-semibold ">
+              3
+            </p>
           </div>
         </MenuItem>
         <MenuItem className="bg-white hover:bg-beige rounded-md">
@@ -164,7 +169,7 @@ const ProfileMenuStudent: React.FC<ProfileMenuProps> = ({
       <MenuButton
         variant="outline"
         borderColor="black"
-        className="rounded-lg font-medium text-black py-2"
+        className="rounded-lg font-medium text-black py-2 px-4"
         as={Button}
         rightIcon={<ChevronDownIcon />}
       >
@@ -172,7 +177,9 @@ const ProfileMenuStudent: React.FC<ProfileMenuProps> = ({
           <img src="/avatar2.svg" />
           <p>
             {" "}
-            {address ? `0x${address.slice(2, 2)}...${address.slice(-2)}` : ""}
+            {typeof address === "string"
+              ? `0x${address.slice(2, 4)}...${address.slice(-4)}`
+              : ""}
           </p>
         </div>
       </MenuButton>
@@ -185,8 +192,8 @@ const ProfileMenuStudent: React.FC<ProfileMenuProps> = ({
             <img src="/avatar2.svg" className="h-10 w-10" />
             <div className="text-black space-y-2">
               <p className="text-green-2 font-bold">
-                {address
-                  ? `0x${address.slice(2, 4)}...${address.slice(-4)}`
+                {typeof address === "string"
+                  ? `0x${address.slice(2, 6)}...${address.slice(-4)}`
                   : ""}
               </p>
               <p>Learner</p>
