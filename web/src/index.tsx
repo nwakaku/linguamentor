@@ -15,12 +15,20 @@ import {
   AuthCoreContextProvider,
   PromptSettingType,
 } from "@particle-network/auth-core-modal";
-import { ModalProvider } from '@particle-network/connect-react-ui'; // @particle-network/connectkit to use Auth Core
-import { WalletEntryPosition } from '@particle-network/auth';
-import { Ethereum, EthereumGoerli, EthereumSepolia,  Avalanche, AvalancheTestnet, BNBChainTestnet, BNBChain,   } from '@particle-network/chains';
-import { evmWallets } from '@particle-network/connect';
+import { ModalProvider } from "@particle-network/connect-react-ui"; // @particle-network/connectkit to use Auth Core
+import { WalletEntryPosition } from "@particle-network/auth";
+import {
+  Ethereum,
+  EthereumGoerli,
+  EthereumSepolia,
+  Avalanche,
+  AvalancheTestnet,
+  BNBChainTestnet,
+  BNBChain,
+} from "@particle-network/chains";
+import { evmWallets } from "@particle-network/connect";
 import { ContractProvider } from "./ContractContext";
-
+import WagmiProvider from "./wagmiProvider";
 
 import("buffer").then(({ Buffer }) => {
   window.Buffer = Buffer;
@@ -63,46 +71,9 @@ root.render(
     <ContractProvider>
       <CacheProvider value={emotionCache}>
         <ChakraProvider theme={chakraTheme}>
-          <WagmiConfig config={wagmiConfig}>
-            <ModalProvider
-              options={{
-                projectId: "fa28478e-a9d9-4d69-a8a8-702bb0291de6",
-                clientKey: "cTbp0AjrvUBEPo2Zs0We08kWF2kH76svkQLmaWFO",
-                appId: "4d065c92-20c3-48fa-8cff-5e340d510af5",
-                chains: [Ethereum, EthereumGoerli, EthereumSepolia],
-                particleWalletEntry: {
-                  //optional: particle wallet config
-                  displayWalletEntry: true, //display wallet button when connect particle success.
-                  defaultWalletEntryPosition: WalletEntryPosition.BR,
-                  supportChains: [Ethereum, EthereumGoerli, EthereumSepolia],
-                  customStyle: {}, //optional: custom wallet style
-                },
-                securityAccount: {
-                  //optional: particle security account config
-                  //prompt set payment password. 0: None, 1: Once(default), 2: Always
-                  promptSettingWhenSign: 1,
-                  //prompt set master password. 0: None(default), 1: Once, 2: Always
-                  promptMasterPasswordSettingWhenLogin: 1,
-                },
-                wallets: evmWallets({
-                  projectId: projectId, //replace with walletconnect projectId
-                  showQrModal: false,
-                }),
-              }}
-              theme={"auto"}
-              language={"en"} //optional:localize, default en
-              walletSort={["Particle Auth", "Wallet"]} //optional:walelt order
-              particleAuthSort={[
-                //optional:display particle auth items and order
-                "email",
-                "phone",
-                "google",
-                "apple",
-                "facebook",
-              ]}>
-              <App />
-            </ModalProvider>
-          </WagmiConfig>
+          <WagmiProvider>
+            <App />
+          </WagmiProvider>
         </ChakraProvider>
       </CacheProvider>
     </ContractProvider>
@@ -113,5 +84,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-

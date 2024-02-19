@@ -42,10 +42,13 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^4.5.4",
     "url": "^0.11.3",
-    "viem": "1.21.4",
-    "wagmi": "1.4.13",
     "web-vitals": "^2.1.4",
-    "yup": "^1.3.3"
+    "yup": "^1.3.3",
+     "@particle-network/rainbowkit-ext": "^1.3.2",
+        "@rainbow-me/rainbowkit": "^1.0.8",
+        "next": "^13.0.6",
+        "viem": "^1.5.4",
+        "wagmi": "^1.3.10"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
