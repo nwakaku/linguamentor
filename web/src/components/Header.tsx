@@ -59,7 +59,7 @@ export const Header = () => {
             />
           )
         )}
-        <ConnectionButton />
+        { !isConnected && <ConnectButton />}
       </div>
     </header>
   );

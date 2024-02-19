@@ -147,9 +147,9 @@ const BecomeATutorFrame = () => {
           src="/vector-6.svg"
         />
         <div className="w-full flex flex-row items-start justify-start relative max-w-full">
-          <div className="flex-1 flex flex-col items-center justify-start gap-[24px] max-w-full z-[1]">
-            <h1 className=" font-bold text-white text-29xl text-center mb-6 text-wrap">
-              Claim rewards for participation and quiz completion
+          <div className="flex-1 flex flex-col items-center justify-center gap-[24px] max-w-full z-[1]">
+            <h1 className=" font-bold text-white text-29xl text-center mb-6 ">
+              Claim rewards for participation and quiz.
             </h1>
             <h2 className="m-0  relative text-3xl leading-[145%] font-normal font-inherit text-lightgoldenrodyellow inline-block max-w-full mq450:text-3xl mq450:leading-[32px]">
               Unlock Rewards Seamlessly: Engage, Participate, and Excel in Every

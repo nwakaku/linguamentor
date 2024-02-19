@@ -21,11 +21,10 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 
 import { ParticleNetwork } from "@particle-network/auth";
-import { arbitrum, mainnet, optimism, polygon } from "wagmi/chains";
+import { arbitrum, mainnet, optimism, polygon, sepolia, avalancheFuji } from "wagmi/chains";
 
 import { particleWallet } from "@particle-network/rainbowkit-ext";
 
-// 1. Get projectId at https://cloud.walletconnect.com
 const projectId = "2c5136315963c8541beaca2234fedf25";
 
 new ParticleNetwork({
@@ -35,7 +34,7 @@ new ParticleNetwork({
 });
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [mainnet, polygon, optimism, arbitrum],
+  [mainnet, polygon, optimism, arbitrum, sepolia, avalancheFuji],
   [publicProvider()]
 );
 

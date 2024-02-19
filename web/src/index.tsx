@@ -8,25 +8,7 @@ import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import "./global.css";
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
-import { WagmiConfig } from "wagmi";
 import { arbitrum, avalanche, avalancheFuji, mainnet } from "viem/chains";
-import { AuthType } from "@particle-network/auth-core";
-import {
-  AuthCoreContextProvider,
-  PromptSettingType,
-} from "@particle-network/auth-core-modal";
-import { ModalProvider } from "@particle-network/connect-react-ui"; // @particle-network/connectkit to use Auth Core
-import { WalletEntryPosition } from "@particle-network/auth";
-import {
-  Ethereum,
-  EthereumGoerli,
-  EthereumSepolia,
-  Avalanche,
-  AvalancheTestnet,
-  BNBChainTestnet,
-  BNBChain,
-} from "@particle-network/chains";
-import { evmWallets } from "@particle-network/connect";
 import { ContractProvider } from "./ContractContext";
 import WagmiProvider from "./wagmiProvider";
 

@@ -12,20 +12,22 @@ import {
 } from "@chakra-ui/react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import Dialog from "./SimpleDialog";
-import {
-  useAccount,
-  useConnectModal,
-} from "@particle-network/connect-react-ui";
+// import {
+//   useAccount,
+//   useConnectModal,
+// } from "@particle-network/connect-react-ui";
+import { useAccount } from "wagmi";
+
 
 export function RoleDialog() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const account = useAccount();
-  const { openConnectModal } = useConnectModal();
+  // const { openConnectModal } = useConnectModal();
 
   const handleConnect = () => {
-    if (openConnectModal && !account) {
-      openConnectModal();
-    }
+    // if (openConnectModal && !account) {
+    //   openConnectModal();
+    // }
     onOpen();
   };
 

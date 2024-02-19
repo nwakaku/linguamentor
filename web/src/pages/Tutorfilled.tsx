@@ -13,6 +13,7 @@ import {
   Textarea,
   Button,
   Input,
+  Link,
 } from "@chakra-ui/react";
 import { RegisterSuccessDialog } from "../dialogs/RegisterSuccess";
 import { useFormik } from "formik";
@@ -20,6 +21,8 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { writeContract } from "@wagmi/core";
 import { useContract } from "../ContractContext";
+
+
 
 interface FormValues {
   language: string;
@@ -39,21 +42,23 @@ const validationSchema = Yup.object({
 const Tutorfilled: FunctionComponent = () => {
   const { contractAbi, contractAddress, contract } = useContract();
 
-  const handleSubmit = async (values: FormValues) => {
-    // try {
-    //   // Smart contract write
-    //   const { hash } = await writeContract({
-    //     address: contractAddress,
-    //     abi: contractAbi,
-    //     functionName: "registerStudent",
-    //     args: [values.language, parseInt(values.duration)],
-    //   });
 
-    //   console.log("Smart contract hash:", hash);
-    // } catch (error) {
-    //   console.error("Form submission error:", error);
-    //   // Handle the error, e.g., show an error message to the user
-    // }
+  const handleSubmit = async (values: FormValues) => {
+    try {
+      // Smart contract write
+      const { hash } = await writeContract({
+        address: contractAddress,
+        abi: contractAbi,
+        functionName: "registerMentor",
+        args: [values.language, parseInt(values.price)],
+      });
+
+      console.log("Smart contract hash:", hash);
+      // After signing, link to the dashboard
+    } catch (error) {
+      console.error("Form submission error:", error);
+      // Handle the error, e.g., show an error message to the user
+    }
   };
 
 
@@ -130,13 +135,13 @@ const Tutorfilled: FunctionComponent = () => {
                       onBlur={formikProps.handleBlur}
                       value={formikProps.values.price}
                     />
-                    <FormLabel className="mt-6">duration</FormLabel>
+                    <FormLabel className="mt-6 hidden">duration</FormLabel>
                     <Select
                       name="duration"
                       placeholder="duration"
                       focusBorderColor="gray"
                       borderColor="gray"
-                      className="hover:border-gray-500"
+                      className="hover:border-gray-500 hidden"
                       onChange={formikProps.handleChange}
                       onBlur={formikProps.handleBlur}
                       value={formikProps.values.duration}

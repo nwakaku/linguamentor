@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, Button } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { MatchTutorDialog } from '../dialogs/MatchTutorDialog';
+import { readContract } from "@wagmi/core";
+import { useContract } from "../ContractContext";
 
 
 const tutors = [
@@ -41,6 +43,31 @@ const tutors = [
 ]
 
 export const TutorList = () => {
+  const { contractAbi, contractAddress, contract } = useContract();
+  const [tutor, setTutor] = useState<any>();
+
+
+  useEffect(() => {
+    // Reading from Contracts
+    const fetchResults = async () => {
+      try {
+        const results = await readContract({
+          address: contractAddress,
+          abi: contractAbi,
+          functionName: "getRegisteredMentors",
+          args: [],
+        });
+        console.log(results);
+        setTutor(results);
+      } catch (error) {
+        console.error("Error fetching tutor data:", error);
+        // Handle the error, e.g., show an error message to the user
+      }
+    };
+
+    fetchResults();
+  }, [contractAddress, contractAbi]);
+
   const [gridItemCount, setGridItemCount] = useState(tutors.length);
   const [selectedTutor, setSelectedTutor] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -91,7 +118,7 @@ export const TutorList = () => {
       {/* Navigation buttons Prev & Next */}
       <div className="space-x-3 flex justify-end mt-6 font-medium">
         <Button
-          className='font-light'
+          className='font-light text-black'
           colorScheme="blackAlpha"
           size='lg'
           borderRadius={18}
@@ -103,7 +130,7 @@ export const TutorList = () => {
           Previous
         </Button>
         <Button
-          className="bg-black hover:bg-black1 font-light"
+          className="bg-black hover:bg-black1 font-light text-white"
           size='lg'
           borderRadius={18}
           variant='solid'
